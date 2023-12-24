@@ -7,6 +7,7 @@
 
  <item>
   <title>Using Kotlin as a Shell for GitHub Actions workflows</title>
+  <description>Using Kotlin as a Shell for GitHub Actions workflows</description>
   <link>https://github.com/fwilhe2/blog/tree/main/github-actions-kotlin-shell</link>
   <guid isPermaLink="false">5b5e9688-a23f-11ee-8475-646ee08c2904</guid>
   <pubDate>Sun, 24 Jan 2021 00:00:00 +0100</pubDate>
