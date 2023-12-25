@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
  <title>fwilhe2's blog</title>
  <description>My lazy blog</description>
@@ -11,6 +11,45 @@
   <link>https://github.com/fwilhe2/blog/tree/main/github-actions-kotlin-shell/README.md</link>
   <guid isPermaLink="false">5b5e9688-a23f-11ee-8475-646ee08c2904</guid>
   <pubDate>Sun, 24 Jan 2021 00:00:00 +0100</pubDate>
+
+  <content:encoded><![CDATA[<h1 id="using-kotlin-as-a-shell-for-github-actions-workflows">Using
+    Kotlin as a Shell for GitHub Actions workflows</h1>
+    <p>Published 2021-01-24 by <a
+    href="https://social.tchncs.de/@fwilhe">fwilhe</a></p>
+    <p>One interesting thing about GitHub Actions is that you can chose a <a
+    href="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#custom-shell">"custom
+    shell"</a> per step. In connection with Kotlin's <a
+    href="https://github.com/Kotlin/kotlin-script-examples/blob/master/jvm/main-kts/MainKts.md">scripting
+    capabilities</a>, this allows you to write "shell" scripts in
+    Kotlin.</p>
+    <p>Here is a trivial example</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
+    <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-20.04</span></span>
+    <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+    <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
+    <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> fwilhe2/setup-kotlin@main</span></span>
+    <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+    <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.4.30</span></span>
+    <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">      - </span><span class="fu">run</span><span class="kw">:</span><span class="at"> </span><span class="ch">|</span></span>
+    <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            java.io.File(&quot;.&quot;).listFiles().forEach {it -&gt; println(it.getName().toString())}</span>
+    <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> kotlin -howtorun .main.kts {0}</span></span></code></pre></div>
+    <p>The <a
+    href="https://github.com/fwilhe2/setup-kotlin"><code>fwilhe2/setup-kotlin</code></a>
+    action is used here to setup the Kotlin cli which is required to use it
+    as a scripting interpreter as it is not installed by default on GitHub's
+    virtual environments.</p>
+    <p>The <code>howtorun</code> flag is new in Kotlin
+    <code>1.4.30-RC</code> and is required because <a
+    href="https://github.com/actions/runner/issues/813">GitHub does not
+    allow to set a custom file extension</a>.</p>
+    <p>"Why?", you might ask at this point. Well, maybe you're more
+    proficient in writing Kotlin compared to Bash or Python? I did not use
+    this very much so far, but I'm eager to see in which cases this might be
+    useful. And, last but not least, finding this out led me down a rabbit
+    hole of how GitHub Actions and the Kotlin cli work, so that was
+    interesting.</p>]]></content:encoded>
+
  </item>
 
 </channel>
